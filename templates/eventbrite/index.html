@@ -1,0 +1,38 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Eventbrite Event Finder</title>
+  <meta name="description" content="The Eventbrite Event Finder">
+  <meta name="author" content="Andy Yu">
+  {% load staticfiles %}
+  <link rel="stylesheet" type="text/css" href="{% static "eventbrite/css/index.css" %}" />
+</head>
+
+<body>
+  <div class="container">
+  <h1>Pick Your Top 3 Event Categories</h1>
+    <div class="categories">
+      <form action="/results/" name="categories" method="post">
+        {% if categories %}
+          {% for category in categories %}
+              <input id="toggle{{ category.id }}" type="checkbox" name="category" value = "{{ category.id }}">
+              <label for="toggle{{ category.id }}" >{{ category.short_name }}</label>
+          {% endfor %}
+        {% else %}
+            <p>No categories are available.</p>
+        {% endif %}
+        <input id="submit-button" type="submit" value="Submit">
+      </form>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="{% static "eventbrite/js/maxboxes.js" %}"></script>
+  <script type="text/javascript">
+  checkboxlimit(document.forms.categories.category, 3);
+  </script>
+</body>
+</html>

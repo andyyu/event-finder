@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Eventbrite Event Finder</title>
+    <meta name="description" content="Event finder using Eventbrite API" />
+    <meta name="author" content="Andy Yu" />
+    <!-- load static files from Django -->
+    {% load staticfiles %} 
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static "eventbrite/css/normalize.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "eventbrite/css/results.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "eventbrite/css/component.css" %}" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Top Navigation -->
+      <div class="results-top clearfix">
+        <a class="results-nav results-nav-prev" href="/"><span> Pick Different Categories</span></a>
+      </div>
+      <header>
+        <h1>Suggested Events <span><em>Powered by Eventbrite</em></span></h1> 
+      </header>
+      <div class="component">
+        <h4>Found events under categories: </h4>
+        {% if categories.cat_string %}
+            <span> {{ categories.cat_string }} </span>
+        {% endif %}
+        {% if events %}
+        <table id="events">
+          <thead>
+              <tr>
+                <th>Logo</th>
+                <th>Event</th>
+                <th>Description</th>
+                <th>Link</th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for event in events %}
+            <tr>
+              <td class="logo"> <img src="{{ event.logo.url }}"></td>
+              <td class="event"> {{ event.name.text }} </td>
+              <td class="description"> <div>{{ event.description.text }} </div></td>
+              <td class="link"> <a href = "{{ event.url }}"> Website </a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_data.has_previous %}
+                    <a href="?categories={{ categories.ids }}&page={{ page_data.previous_page }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ page_data.page_number }} of {{ page_data.page_count }}.
+                </span>
+
+                {% if page_data.has_next %}
+                    <a href="?categories={{ categories.ids }}&page={{ page_data.next_page }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+        {% else %}
+            <p>No events found. Sorry!</p>
+        {% endif %}
+        <p class="filler"> Created by Andy Yu for the Eventbrite Coding Challenge.<br> 2016.</p>
+      </div>
+    </div><!-- /container -->
+    <!-- jQuery -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <!-- Sticky Header -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+    <script src="{% static "eventbrite/js/jquery.stickyheader.js" %}"></script>
+    <!-- Bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  </body>
+</html>

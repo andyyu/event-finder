@@ -1,0 +1,26 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Eventbrite Event Finder</title>
+  <meta name="description" content="The Eventbrite Event Finder">
+  <meta name="author" content="Andy Yu">
+
+  <link rel="stylesheet" href="">
+</head>
+
+<body>
+  {% if data %}
+    {% for element in data %}
+        <span> {{ element }} </span>
+    {% endfor %}
+  {% else %}
+      <p>No categories were chosen.</p>
+  {% endif %}
+
+  <!-- SCRIPTS -->
+  <script src="js/scripts.js"></script>
+</body>
+</html>
