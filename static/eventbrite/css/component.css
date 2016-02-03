@@ -8,22 +8,23 @@
 	overflow: hidden;
 }
 .component .filler {
-	/*font-family: "Blokk", Arial, sans-serif;*/
 	color: #d3d3d3;
 	font-style: italic;
 }
+
 table {
     border-collapse: collapse;
     margin-bottom: 3em;
     width: 100%;
     background: #fff;
+    table-layout: fixed;
 }
+
 td, th {
     padding: 0.75em 1.5em;
     text-align: left;
     max-height: 100px;
-    width: 25%; 
-    overflow: hidden;
+    word-wrap: break-word;
 }
 	td.err {
 		background-color: #e992b9;
@@ -32,12 +33,24 @@ td, th {
 		text-align: center;
 		line-height: 1;
 	}
+
+.logo {
+  width:15%;
+}
+.event{
+  width:25%;
+}
+.description{
+  width:50%;
+}
+.link{
+  width:15%;
+}
 th {
     background-color: #31698a;
     font-weight: bold;
     color: #fff;
     white-space: nowrap;
-    width: 25%; 
 }
 tbody th {
 	background-color: #2ea879;
@@ -50,7 +63,6 @@ tbody tr:hover {
     background-color: rgba(129,208,177,.3);
 }
 
-/* For appearance */
 .sticky-wrap {
 	overflow-x: auto;
 	overflow-y: hidden;
@@ -67,12 +79,12 @@ tbody tr:hover {
 	left: 0;
 	transition: all .125s ease-in-out;
 	z-index: 50;
-	width: auto; /* Prevent table from stretching to full size */
+	width: auto; 
 }
 	.sticky-wrap .sticky-thead {
 		box-shadow: 0 0.25em 0.1em -0.1em rgba(0,0,0,.125);
 		z-index: 100;
-		width: 100%; /* Force stretch */
+		width: 100%; 
 	}
 	.sticky-wrap .sticky-intersect {
 		opacity: 1;
@@ -92,4 +104,3 @@ tbody tr:hover {
 	overflow-y: auto;
 	max-height: 50vh;
 }
-
